@@ -1,10 +1,14 @@
-package main
+package godsa
 
 import (
 	"container/list"
 	"fmt"
 	"sync"
 )
+
+/*
+	ahocorasick
+*/
 
 type Emit struct {
 	S int
