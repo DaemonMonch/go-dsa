@@ -45,32 +45,42 @@ func (n *node) add(s, e int, arr []int) int {
 }
 
 func (n *node) querySum(s, e int) int {
-	return n.find(n.s, n.e, s, e)
+	return n.sum(n.s, n.e, s, e)
 }
 
-func (n *node) find(ns, ne, s, e int) int {
-	fmt.Println(ns, ne, "  ", s, e)
+func (n *node) sum(ns, ne, s, e int) int {
+	// fmt.Println(ns, ne, "  ", s, e)
 	if s <= ns && e >= ne {
 		return n.ele
 	}
-
-	// if n.left == nil {
-	// 	return n.ele
-	// }
 
 	if s > ne || e < ns {
 		return 0
 	}
 
 	mid := (ns + ne) / 2
-	// if mid > e {
-	// 	return n.left.find(s, e)
-	// } else if mid <= s {
-	// 	return n.right.find(s, e)
-	// } else {
-	// 	return n.left.find(s, mid) + n.right.find(mid, e)
-	// }
-	return n.left.find(ns, mid, s, e) + n.right.find(mid+1, ne, s, e)
+	return n.left.sum(ns, mid, s, e) + n.right.sum(mid+1, ne, s, e)
+}
+
+func (n *node) update(idx, delta int) {
+	n.updateNode(n.s, n.e, idx, delta)
+}
+
+func (n *node) updateNode(ns, ne, idx, delta int) {
+	if ns <= idx && idx <= ne {
+		n.ele += delta
+	}
+	if ns == ne {
+		return
+	}
+	mid := (ns + ne) / 2
+	if mid >= idx {
+		n.left.updateNode(ns, mid, idx, delta)
+	}
+
+	if mid < idx {
+		n.right.updateNode(mid+1, ne, idx, delta)
+	}
 }
 
 func print(root *node) {
