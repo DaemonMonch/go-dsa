@@ -108,4 +108,11 @@ func TestCNText(t *testing.T) {
 func TestCi(t *testing.T) {
 	t.Logf("%c", unicode.ToLower(rune('A')))
 	t.Log(len([]rune("消费")))
+
+	type I interface {
+		s() int
+	}
+
+	var i I
+	t.Log(i.s())
 }
