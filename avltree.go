@@ -176,6 +176,10 @@ func (t *AvlTree) Insert(v int) {
 
 }
 
+func balance(stack *Stack, cur, pcur *Avlnode) {
+
+}
+
 func (t *AvlTree) Print() {
 	printa(t.r)
 	println()
